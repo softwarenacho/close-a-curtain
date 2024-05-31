@@ -1,16 +1,16 @@
 import type { Metadata, Viewport } from 'next';
 import './globals.scss';
 
-const APP_NAME = 'pwa-next-template';
-const APP_DEFAULT_TITLE = 'PWA Next.js template';
+const APP_NAME = 'Close a Curtain';
+const APP_DEFAULT_TITLE = 'Close a Curtain Demo';
 const APP_DESCRIPTION =
-  'Next.js template with PWA integrated and scoring average 100';
+  'I created this template to test a curtain closing animation, the basic version starts the animation on load in this first iteration';
 
 export const metadata: Metadata = {
   title: APP_NAME,
   description: APP_DESCRIPTION,
   manifest: '/manifest.json',
-  keywords: ['next.js', 'template', 'ts', 'sass'],
+  keywords: ['animation', 'ui', 'curtain'],
   authors: [{ name: 'Nacho Betancourt' }],
   appleWebApp: {
     capable: true,

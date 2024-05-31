@@ -1,8 +1,8 @@
 {
-  "name": "PWA Next.js template",
-  "short_name": "pwa-next-template",
-  "id": "pwa-next-template",
-  "description": "Next.js template with PWA integrated and scoring average 100",
+  "name": "Close a Curtain",
+  "short_name": "CaC",
+  "id": "close-a-curtain",
+  "description": "I created this template to test a curtain closing animation, the basic version starts the animation on load in this first iteration.",
   "display": "standalone",
   "start_url": "/",
   "scope": "/",
@@ -69,5 +69,5 @@
   "launch_handler": {
     "client_mode": ["focus-existing", "auto"]
   },
-  "categories": ["entertainment", "games"]
+  "categories": ["animation", "ui", "curtain"]
 }

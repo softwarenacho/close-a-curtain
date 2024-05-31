@@ -1,24 +1,37 @@
-# Next.js PWA template
+# Close a curtain
 
 ## Getting Started
 
-This template was created to have a base for projects with PWA integrated by using [@ducanh2912/next-pwa](https://ducanh-next-pwa.vercel.app/docs/next-pwa/getting-started).
+I created this template to test a curtain closing animation, the basic version starts the animation on load in this first iteration.
 
-This template also install `sass` for styling.
+This project runs as a PWA, bootstraped with [next-pwa-template](https://github.com/softwarenacho/next-pwa-template).
 
+### Installation
+
+```bash
+  yarn
 ```
-Use this template to bootstrap your <b>Next.js</b> web application
-with <b>PWA</b> integrated and set to obtaing <b>100%</b> average on
-<b>Lighthouse</b> reports
+
+### Development
+
+```bash
+  yarn dev
 ```
 
-<center>
+### Build and run production
 
-![Score](./public/screenshots/100%20516x186.gif)
-![Installable](./public/screenshots/UI%201252x1164.webp)
+```bash
+  yarn build
+  yarn start
+```
 
-</center>
+## To do
 
-## To Do
-
-- Migrate to `serwist`
+- Style and accesibility in clickable button
+- Start animation on click
+- Stop animation on curtain click
+- Customize animation start
+- Customize animation styles
+- Customize curtain styles
+- Add informative description
+- npm publish isolated Curtain component
