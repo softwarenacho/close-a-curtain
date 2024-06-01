@@ -1,3 +1,4 @@
+'use client';
 import { Suspense } from 'react';
 import Curtain from './_components/Curtain';
 import styles from './_styles/page.module.scss';
