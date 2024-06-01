@@ -7,6 +7,7 @@ import styles from './_styles/page.module.scss';
 
 const Home = () => {
   const [animationControl, setControl] = useState<boolean>(false);
+  const [customize, setCustomize] = useState<boolean>(false);
   const [props, setProps] = useState<CustomProps>({
     backgroundColor: '#8b4513',
     borderColor: '#daa520',
@@ -21,17 +22,31 @@ const Home = () => {
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <Curtain control={animationControl} setControl={setControl} props={props}>
+      <Curtain
+        control={animationControl}
+        setControl={setControl}
+        props={customize ? props : {}}
+      >
         <main className={styles.main}>
           <section>
             <h1 onClick={() => setControl(!animationControl)}>
               Close a curtain
             </h1>
-            <Customization
-              props={props}
-              setProps={setProps}
-              setControl={setControl}
-            />
+            <label className={styles.customize}>
+              <span>Customize</span>
+              <input
+                type='checkbox'
+                checked={customize}
+                onChange={(e) => setCustomize(e.target.checked)}
+              />
+            </label>
+            {customize && (
+              <Customization
+                props={props}
+                setProps={setProps}
+                setControl={setControl}
+              />
+            )}
             <Description />
           </section>
         </main>

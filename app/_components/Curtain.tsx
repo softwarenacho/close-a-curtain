@@ -103,7 +103,6 @@ const Curtain = ({ children, control, setControl, props }: CurtainProps) => {
   }, [props.closeSpeed, props.closeTiming, setControl]);
 
   const calculatePosition = () => {
-    console.log('isAnimating', isAnimating);
     if (props.showBorder === undefined) {
       return defaultProps.showBorder
         ? '0'

@@ -119,12 +119,7 @@ const Customization = ({ props, setProps, setControl }: CustomizationProps) => {
       </form>
     );
   };
-  return (
-    <>
-      <p>Customize the Curtain component</p>
-      {controls()}
-    </>
-  );
+  return controls();
 };
 
 export default Customization;
