@@ -15,11 +15,9 @@ export default function Home() {
             </h1>
             <p>
               This component features an animated curtain effect that
-              dynamically opens and closes based on user interactions.
-            </p>
-            <p>
-              Perfect for adding a dramatic reveal or a hidden content section
-              to your web application.
+              dynamically opens and closes based on user interactions. Perfect
+              for adding a dramatic reveal or a hidden content section to your
+              web application.
             </p>
             <h3>How it works:</h3>
             <ul>

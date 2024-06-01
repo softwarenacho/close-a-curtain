@@ -3,7 +3,6 @@
   width: 100vw;
   height: 100vh;
   transition: height;
-
   .top,
   .bottom {
     cursor: pointer;
@@ -16,13 +15,12 @@
     border-style: double;
     border-color: goldenrod;
     background: saddlebrown;
+    user-select: none;
   }
-
   .top {
     top: 0;
     border-bottom-width: 10px;
   }
-
   .bottom {
     bottom: 0;
     border-top-width: 10px;
