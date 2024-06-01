@@ -14,6 +14,7 @@ const Home = () => {
     borderWidth: '10px',
     borderStyle: 'double',
     showBorder: true,
+    showShadow: true,
     openSpeed: '1s',
     closeSpeed: '0.5s',
     openTiming: 'ease-in',

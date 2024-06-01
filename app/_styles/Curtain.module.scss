@@ -14,4 +14,10 @@
     border-width: 0;
     user-select: none;
   }
+  .top {
+    z-index: 3;
+  }
+  .bottom {
+    z-index: 2;
+  }
 }

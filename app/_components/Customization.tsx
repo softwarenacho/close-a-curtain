@@ -45,6 +45,19 @@ const Customization = ({ props, setProps, setControl }: CustomizationProps) => {
           />
         </label>
         <label>
+          <span>Show Shadow</span>
+          <input
+            type='checkbox'
+            checked={props.showShadow}
+            onChange={(event) =>
+              setProps({
+                ...props,
+                showShadow: event.target.checked,
+              })
+            }
+          />
+        </label>
+        <label>
           <span>Show Border</span>
           <input
             type='checkbox'

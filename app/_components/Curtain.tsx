@@ -35,6 +35,7 @@ export interface CustomProps {
   borderWidth?: string;
   borderStyle?: BorderStyle;
   showBorder?: boolean;
+  showShadow?: boolean;
   openSpeed?: string;
   closeSpeed?: string;
   openTiming?: string;
@@ -54,6 +55,7 @@ const defaultProps = {
   borderWidth: '10px',
   borderStyle: 'double',
   showBorder: true,
+  showShadow: true,
   openSpeed: '1s',
   closeSpeed: '0.5s',
   openTiming: 'ease-in',
@@ -117,6 +119,17 @@ const Curtain = ({ children, control, setControl, props }: CurtainProps) => {
       : `-${props.borderWidth || defaultProps.borderWidth}`;
   };
 
+  const getFilter = (isTop: boolean, shadow: boolean) => {
+    let filter = '';
+    if (isTop && shadow) {
+      filter = 'drop-shadow(0px 1px 1px black)';
+    }
+    if (!isTop && shadow) {
+      filter = 'drop-shadow(0px -1px 1px black)';
+    }
+    return filter;
+  };
+
   const curtain = (top: 'top' | 'bottom' = 'top') => {
     const isTop = top === 'top';
     return (
@@ -136,6 +149,12 @@ const Curtain = ({ children, control, setControl, props }: CurtainProps) => {
           borderTopWidth: !isTop
             ? props.borderWidth || defaultProps.borderWidth
             : '',
+          filter: getFilter(
+            isTop,
+            props.showShadow !== undefined
+              ? !!props.showShadow
+              : defaultProps.showShadow,
+          ),
         }}
       />
     );
