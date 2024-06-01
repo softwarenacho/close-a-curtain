@@ -1,7 +1,7 @@
 @mixin flex-center {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
 }
 
@@ -14,15 +14,19 @@
   overflow: scroll;
   user-select: none;
   h1,
-  p {
+  h3,
+  p,
+  li {
     text-align: center;
+    line-height: 2;
   }
   h1 {
     cursor: pointer;
+    text-decoration: underline;
   }
-  p {
+  p,
+  li {
     max-width: 386px;
-    line-height: 2;
   }
   section {
     @include flex-center;

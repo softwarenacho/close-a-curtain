@@ -1,11 +1,12 @@
-import { ReactNode, useEffect, useRef, useState } from 'react';
+import { ReactNode, useCallback, useEffect, useRef, useState } from 'react';
 import styles from '../_styles/Curtain.module.scss';
 
 interface CurtainProps {
   children: ReactNode;
+  externalControl: boolean;
 }
 
-export default function Curtain({ children }: CurtainProps) {
+export default function Curtain({ children, externalControl }: CurtainProps) {
   const [isAnimating, setIsAnimating] = useState<boolean>(false);
   const [isReversing, setIsReversing] = useState<boolean>(false);
 
@@ -35,7 +36,7 @@ export default function Curtain({ children }: CurtainProps) {
     styleSheet.insertRule(keyframes, styleSheet.cssRules.length);
   };
 
-  const start = (box: HTMLDivElement) => {
+  const start = useCallback((box: HTMLDivElement) => {
     if (box) {
       const currentHeight = getCurrentHeight(box);
       const animationName = `openAnimation${Date.now()}`;
@@ -50,14 +51,14 @@ export default function Curtain({ children }: CurtainProps) {
       setIsAnimating(true);
       setIsReversing(false);
     }
-  };
+  }, []);
 
-  const handleStart = () => {
+  const handleStart = useCallback(() => {
     topRef.current && start(topRef.current);
     bottomRef.current && start(bottomRef.current);
-  };
+  }, [start]);
 
-  const stop = (box: HTMLDivElement) => {
+  const stop = useCallback((box: HTMLDivElement) => {
     if (box) {
       const currentHeight = getCurrentHeight(box);
       const animationName = `closeAnimation${Date.now()}`;
@@ -73,12 +74,12 @@ export default function Curtain({ children }: CurtainProps) {
       setIsAnimating(false);
       setIsReversing(true);
     }
-  };
+  }, []);
 
-  const handleStop = () => {
+  const handleStop = useCallback(() => {
     topRef.current && stop(topRef.current);
     bottomRef.current && stop(bottomRef.current);
-  };
+  }, [stop]);
 
   useEffect(() => {
     const box = topRef.current;
@@ -93,6 +94,10 @@ export default function Curtain({ children }: CurtainProps) {
       });
     }
   }, [isAnimating, isReversing]);
+
+  useEffect(() => {
+    externalControl ? handleStart() : handleStop();
+  }, [externalControl, handleStart, handleStop]);
 
   return (
     <div className={styles.container}>
