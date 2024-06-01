@@ -28,6 +28,7 @@
   p,
   li {
     max-width: 386px;
+    margin-bottom: 1rem;
   }
   section {
     @include flex-center;
