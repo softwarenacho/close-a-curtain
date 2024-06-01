@@ -23,19 +23,19 @@ const createAnimation = (
   styleSheet.insertRule(keyframes, styleSheet.cssRules.length);
 };
 
-export const start = (box: HTMLDivElement) => {
+export const start = (box: HTMLDivElement, speed: string, timing: string) => {
   if (box) {
     const currentHeight = getCurrentHeight(box);
     const animationName = `openAnimation${Date.now()}`;
     createAnimation(animationName, currentHeight, '50vh');
     box.style.animation = 'none';
     requestAnimationFrame(() => {
-      box.style.animation = `${animationName} 2s ease-in forwards`;
+      box.style.animation = `${animationName} ${speed} ${timing} forwards`;
     });
   }
 };
 
-export const stop = (box: HTMLDivElement) => {
+export const stop = (box: HTMLDivElement, speed: string, timing: string) => {
   if (box) {
     const currentHeight = getCurrentHeight(box);
     const animationName = `closeAnimation${Date.now()}`;
@@ -43,8 +43,17 @@ export const stop = (box: HTMLDivElement) => {
     box.style.height = currentHeight;
     box.style.animation = 'none';
     requestAnimationFrame(() => {
-      box.style.animation = `${animationName} 1s ease-out forwards`;
+      box.style.animation = `${animationName} ${speed} ${timing} forwards`;
     });
 
   }
+};
+
+export const getContrast = (hexcolor: string) => {
+  hexcolor = hexcolor.replace('#', '');
+  let r = parseInt(hexcolor.substr(0, 2), 16);
+  let g = parseInt(hexcolor.substr(2, 2), 16);
+  let b = parseInt(hexcolor.substr(4, 2), 16);
+  let yiq = (r * 299 + g * 587 + b * 114) / 1000;
+  return yiq >= 128 ? 'black' : 'white';
 };

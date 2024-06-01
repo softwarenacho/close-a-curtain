@@ -1,28 +1,17 @@
-import { Dispatch, SetStateAction, useState } from 'react';
+import { Dispatch, SetStateAction } from 'react';
 import styles from '../_styles/Customization.module.scss';
+import { getContrast } from '../_utils/helpers';
 import { BorderStyle, CustomProps, borderStyles } from './Curtain';
 
 interface CustomizationProps {
+  props: CustomProps;
   setProps: Dispatch<SetStateAction<CustomProps>>;
   setControl: Dispatch<SetStateAction<boolean>>;
 }
 
-const Customization = ({ setProps, setControl }: CustomizationProps) => {
-  const [backgroundColor, setBackgroundColor] = useState<string>('#8b4513');
-  const [borderColor, setBorderColor] = useState<string>('#daa520');
-  const [borderWidth, setBorderWidth] = useState<string>('10px');
-  const [borderStyle, setBorderStyle] = useState<BorderStyle>('double');
-  const [isChecked, setIsChecked] = useState(true);
-
+const Customization = ({ props, setProps, setControl }: CustomizationProps) => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setProps({
-      backgroundColor,
-      borderColor,
-      borderWidth,
-      borderStyle,
-      showBorder: isChecked,
-    });
     setControl(true);
   };
 
@@ -32,43 +21,82 @@ const Customization = ({ setProps, setControl }: CustomizationProps) => {
         <label>
           <span>Background Color</span>
           <input
-            value={backgroundColor}
-            onChange={(event) => setBackgroundColor(event.target.value)}
+            value={props.backgroundColor}
+            onChange={(event) =>
+              setProps({
+                ...props,
+                backgroundColor: event.target.value,
+              })
+            }
             type='color'
           />
         </label>
         <label>
           <span>Border Color</span>
           <input
-            value={borderColor}
-            onChange={(event) => setBorderColor(event.target.value)}
+            value={props.borderColor}
+            onChange={(event) =>
+              setProps({
+                ...props,
+                borderColor: event.target.value,
+              })
+            }
             type='color'
           />
         </label>
         <label>
-          <span>Show Border Initial</span>
+          <span>Show Border</span>
           <input
             type='checkbox'
-            checked={isChecked}
-            onChange={(event) => setIsChecked(event.target.checked)}
+            checked={props.showBorder}
+            onChange={(event) =>
+              setProps({
+                ...props,
+                showBorder: event.target.checked,
+              })
+            }
           />
         </label>
         <label>
           <span>Border Width</span>
           <input
-            value={borderWidth}
-            onChange={(event) => setBorderWidth(event.target.value)}
+            value={props.borderWidth}
+            onChange={(event) =>
+              setProps({ ...props, borderWidth: event.target.value })
+            }
             type='text'
-            placeholder='eg. 1rem 5px 0.5vh'
+          />
+        </label>
+        <label>
+          <span>Open Speed</span>
+          <input
+            value={props.openSpeed}
+            onChange={(event) =>
+              setProps({ ...props, openSpeed: event.target.value })
+            }
+            type='text'
+          />
+        </label>
+        <label>
+          <span>Close Speed</span>
+          <input
+            value={props.closeSpeed}
+            onChange={(event) =>
+              setProps({ ...props, closeSpeed: event.target.value })
+            }
+            type='text'
           />
         </label>
         <label>
           <span>Border Style</span>
           <select
             id='border-style-select'
-            value={borderStyle}
+            value={props.borderStyle}
             onChange={(event) =>
-              setBorderStyle(event.target.value as BorderStyle)
+              setProps({
+                ...props,
+                borderStyle: event.target.value as BorderStyle,
+              })
             }
           >
             {borderStyles.map((style) => (
@@ -78,7 +106,16 @@ const Customization = ({ setProps, setControl }: CustomizationProps) => {
             ))}
           </select>
         </label>
-        <button type='submit'>Set!</button>
+        <button
+          style={{
+            backgroundColor: props.backgroundColor,
+            borderColor: props.borderColor,
+            color: getContrast(props.backgroundColor || ''),
+          }}
+          type='submit'
+        >
+          Close!
+        </button>
       </form>
     );
   };

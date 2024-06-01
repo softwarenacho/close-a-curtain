@@ -35,6 +35,10 @@ export interface CustomProps {
   borderWidth?: string;
   borderStyle?: BorderStyle;
   showBorder?: boolean;
+  openSpeed?: string;
+  closeSpeed?: string;
+  openTiming?: string;
+  closeTiming?: string;
 }
 
 interface CurtainProps {
@@ -50,6 +54,10 @@ const defaultProps = {
   borderWidth: '10px',
   borderStyle: 'double',
   showBorder: true,
+  openSpeed: '1s',
+  closeSpeed: '0.5s',
+  openTiming: 'ease-in',
+  closeTiming: 'ease-out',
 };
 
 const Curtain = ({ children, control, setControl, props }: CurtainProps) => {
@@ -60,31 +68,52 @@ const Curtain = ({ children, control, setControl, props }: CurtainProps) => {
   const bottomRef = useRef<HTMLDivElement>(null);
 
   const handleStart = useCallback(() => {
-    topRef.current && start(topRef.current);
-    bottomRef.current && start(bottomRef.current);
     if (topRef.current && bottomRef.current) {
+      start(
+        topRef.current,
+        props.openSpeed || defaultProps.openSpeed,
+        props.openTiming || defaultProps.openTiming,
+      );
+      start(
+        bottomRef.current,
+        props.openSpeed || defaultProps.openSpeed,
+        props.openTiming || defaultProps.openTiming,
+      );
       setIsAnimating(true);
       setIsReversing(false);
     }
-  }, []);
+  }, [props.openSpeed, props.openTiming]);
 
   const handleStop = useCallback(() => {
-    topRef.current && stop(topRef.current);
-    bottomRef.current && stop(bottomRef.current);
     if (topRef.current && bottomRef.current) {
+      stop(
+        topRef.current,
+        props.closeSpeed || defaultProps.closeSpeed,
+        props.closeTiming || defaultProps.closeTiming,
+      );
+      stop(
+        bottomRef.current,
+        props.closeSpeed || defaultProps.closeSpeed,
+        props.closeTiming || defaultProps.closeTiming,
+      );
       setIsAnimating(false);
       setIsReversing(true);
     }
     setControl(false);
-  }, [setControl]);
+  }, [props.closeSpeed, props.closeTiming, setControl]);
 
   const calculatePosition = () => {
+    console.log('isAnimating', isAnimating);
     if (props.showBorder === undefined) {
       return defaultProps.showBorder
+        ? '0'
+        : isAnimating
         ? '0'
         : `-${props.borderWidth || defaultProps.borderWidth}`;
     }
     return props.showBorder
+      ? '0'
+      : isAnimating
       ? '0'
       : `-${props.borderWidth || defaultProps.borderWidth}`;
   };

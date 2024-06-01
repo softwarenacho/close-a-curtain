@@ -1,7 +1,15 @@
 .form {
   display: flex;
   flex-direction: column;
+  margin-bottom: 4rem;
   gap: 1rem;
+  button {
+    height: 3rem;
+    margin-top: 1rem;
+  }
+  input[type='text'] {
+    width: 4rem;
+  }
   label {
     display: flex;
     justify-content: flex-end;
