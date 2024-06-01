@@ -23,6 +23,7 @@
   h1 {
     cursor: pointer;
     text-decoration: underline;
+    user-select: none;
   }
   p,
   li {
